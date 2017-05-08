@@ -23,6 +23,7 @@ import org.flywaydb.core.internal.dbsupport.greenplum.GreenPlumDbSupport;
 import org.flywaydb.core.internal.dbsupport.enterprisedb.EnterpriseDBDbSupport;
 import org.flywaydb.core.internal.dbsupport.h2.H2DbSupport;
 import org.flywaydb.core.internal.dbsupport.hsql.HsqlDbSupport;
+import org.flywaydb.core.internal.dbsupport.impala.ImpalaDbSupport;
 import org.flywaydb.core.internal.dbsupport.mysql.MySQLDbSupport;
 import org.flywaydb.core.internal.dbsupport.oracle.OracleDbSupport;
 import org.flywaydb.core.internal.dbsupport.phoenix.PhoenixDbSupport;
@@ -70,6 +71,9 @@ public class DbSupportFactory {
             LOG.info("Database: " + getJdbcUrl(connection) + " (" + databaseProductName + ")");
         }
 
+        if (databaseProductName.startsWith("Impala")) {
+            return new ImpalaDbSupport(connection);
+        }
         if (databaseProductName.startsWith("Apache Derby")) {
             return new DerbyDbSupport(connection);
         }
