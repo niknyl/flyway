@@ -15,14 +15,14 @@
 --
 
 CREATE TABLE ${schema}.${table} (
-    installed_rank INT ,
+    installed_rank INT PRIMARY KEY,
     version STRING,
     description STRING,
     type STRING,
     script STRING,
     checksum INT,
     installed_by STRING,
-    installed_on TIMESTAMP ,
-    execution_time INT ,
+    installed_on TIMESTAMP,
+    execution_time INT,
     success BOOLEAN
-);
+) STORED AS KUDU;
